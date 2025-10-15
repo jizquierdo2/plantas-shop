@@ -19,8 +19,18 @@
       --radius:16px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0b1020,#101827 40%,#0f172a);color:var(--text)}
-    header{position:sticky;top:0;z-index:20;background:rgba(17,24,39,.7);backdrop-filter:blur(8px);border-bottom:1px solid #1f2937}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Helvetica,Arial,sans-serif;
+      background:linear-gradient(160deg,#0b1020,#101827 40%,#0f172a);
+      color:var(--text)
+    }
+    header{
+      position:sticky;top:0;z-index:20;
+      background:rgba(17,24,39,.7);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid #1f2937
+    }
     .wrap{max-width:1100px;margin:0 auto;padding:clamp(14px,2vw,22px)}
     .brand{display:flex;align-items:center;gap:12px}
     .brand h1{margin:0;font-size:clamp(18px,3vw,22px);font-weight:700}
@@ -30,22 +40,79 @@
     @media (max-width:980px){.layout{grid-template-columns:1fr}}
 
     /* Catalog */
-    .grid{display:grid;grid-template-columns:repeat( auto-fill, minmax(220px,1fr) );gap:16px}
-    .card{background:linear-gradient(180deg,#0d1324,#0b1120);border:1px solid #1f2937;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:10px}
-    .thumb{height:140px;border-radius:12px;background:radial-gradient(70% 60% at 50% 40%, #1e293b 0%, #0b1220 100%);display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:12px;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .title{font-weight:650}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat( auto-fill, minmax(220px,1fr) );
+      gap:16px
+    }
+    .card{
+      background:linear-gradient(180deg,#0d1324,#0b1120);
+      border:1px solid #1f2937;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px
+    }
+    /* Imagen cuadrada con overlay */
+    .thumb{
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:radial-gradient(70% 60% at 50% 40%, #1e293b 0%, #0b1220 100%);
+      aspect-ratio:1/1;                 /* 👈 CUADRADA */
+      display:block
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;                 /* 👈 Cubre sin deformar */
+      display:block
+    }
+    /* Overlay inferior oscuro + blur */
+    .overlay{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      background:rgba(15,23,42,0.85);   /* slate-900 con alpha */
+      backdrop-filter:blur(6px);
+      padding:10px 12px;
+      display:flex; flex-direction:column; gap:8px;
+      border-radius:0 0 12px 12px;      /* 👈 mismos bordes inferiores que la imagen */
+      border-top:1px solid rgba(148,163,184,0.12);
+    }
+    .overlay-row{
+      display:flex; align-items:center; justify-content:space-between; gap:10px
+    }
+    .plant-name{font-weight:700;color:#e5e7eb;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .price{color:#a7f3d0;font-weight:700}
-    .qty{display:flex;gap:8px;align-items:center;margin-top:auto}
-    .btn{cursor:pointer;border:0;border-radius:12px;padding:10px 12px;font-weight:700}
-    .btn-primary{background:var(--accent);color:#052e16}
-    .btn-primary:hover{background:var(--accent-2)}
-    .btn-ghost{background:#111827;color:#e5e7eb;border:1px solid #1f2937}
-    .btn-ghost:hover{background:#0b1220}
-    .pill{display:inline-flex;gap:8px;align-items:center;background:var(--chip);border:1px solid #1f2937;border-radius:999px;padding:6px 10px;color:#cbd5e1;font-size:12px}
+
+    /* Controles pequeños */
+    .controls{display:flex;align-items:center;gap:6px;width:100%}
+    .tiny-btn{
+      cursor:pointer; border:1px solid #1f2937;
+      border-radius:8px; padding:6px 8px; font-weight:700;
+      background:rgba(31,41,55,0.8); color:#e5e7eb;
+    }
+    .tiny-btn:hover{background:#1f2937}
+    .tiny-primary{
+      background:var(--accent); color:#052e16; border-color:transparent;
+      margin-left:auto
+    }
+    .tiny-primary:hover{background:var(--accent-2)}
+    .qty-chip{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:6px 8px; min-width:28px;
+      border-radius:8px; font-weight:700;
+      background:rgba(31,41,55,0.8); color:#e5e7eb; border:1px solid #1f2937
+    }
 
     /* Cart */
-    .panel{background:linear-gradient(180deg,#0b1020,#0a0f1b);border:1px solid #1f2937;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;position:sticky;top:68px}
+    .panel{
+      background:linear-gradient(180deg,#0b1020,#0a0f1b);
+      border:1px solid #1f2937;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:16px;position:sticky;top:68px
+    }
     .panel h2{margin:0 0 8px;font-size:18px}
     .cart-list{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow:auto;padding-right:6px}
     .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#0a1221;border:1px solid #1f2937;border-radius:12px;padding:10px}
@@ -61,6 +128,12 @@
     label{font-size:12px;color:#cbd5e1}
     input, textarea{width:100%;background:#0a1221;border:1px solid #1f2937;border-radius:12px;padding:10px;color:#e5e7eb}
     input:focus, textarea:focus{outline:2px solid #22c55e33}
+    .btn{cursor:pointer;border:0;border-radius:12px;padding:10px 12px;font-weight:700}
+    .btn-primary{background:var(--accent);color:#052e16}
+    .btn-primary:hover{background:var(--accent-2)}
+    .btn-ghost{background:#111827;color:#e5e7eb;border:1px solid #1f2937}
+    .btn-ghost:hover{background:#0b1220}
+    .pill{display:inline-flex;gap:8px;align-items:center;background:var(--chip);border:1px solid #1f2937;border-radius:999px;padding:6px 10px;color:#cbd5e1;font-size:12px}
     .submit{display:flex;gap:10px;align-items:center}
 
     .toast{position:fixed;right:16px;bottom:16px;background:#052e16;color:#dcfce7;border:1px solid #065f46;padding:12px 14px;border-radius:12px;opacity:0;transform:translateY(8px);transition:all .25s}
@@ -140,7 +213,6 @@
           </div>
           <div class="hint">Al enviar, registramos tu pedido y te contactaremos por WhatsApp o correo.</div>
 
-          <!-- 👇 2) Link a Instagram al final del formulario -->
           <div style="margin-top:6px">
             <a href="https://www.instagram.com/lab.paisajismo/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">
               Síguenos en Instagram: @lab.paisajismo
@@ -153,7 +225,7 @@
 
   <div id="toast" class="toast">Pedido enviado. ¡Gracias! ✅</div>
 
-  <!-- 👇 1) Modal de éxito -->
+  <!-- Modal de éxito -->
   <div id="successModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="successTitle">
     <div class="modal">
       <h3 id="successTitle">¡Pedido enviado con éxito! 🎉</h3>
@@ -166,10 +238,10 @@
   </div>
 
   <script>
-    // ⚙️ 1) Configura tu endpoint de Google Apps Script publicado como Web App (doPost)
+    // ⚙️ Configura tu endpoint de Google Apps Script publicado como Web App (doPost)
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwsv7rvpUiDdm-OUqie2yRYKBUx2BxX5ynbsuh-j8NWn5AyMlzIYQC9lMtrs_mgbhGNYg/exec"; // <— reemplaza por tu URL
 
-    // 📦 2) Catálogo con precios en CLP (extraído del catálogo PDF)
+    // 📦 Catálogo con precios en CLP
     const products = [
       { name: "Lavanda stoecha", price: 7000 },
       { name: "Sisyrinchium", price: 6000 },
@@ -229,17 +301,26 @@
       }
 
       catalogEl.innerHTML = list.map(p => {
-        return `<article class="card">
-          <div class="thumb"><img src="images/${cssId(p.name)}.jpg" alt="${p.name}" onerror="this.replaceWith(document.createTextNode('Imagen de referencia'))" /></div>
-          <div class="title">${p.name}</div>
-          <div class="price">${CLP.format(p.price)}</div>
-          <div class="qty">
-            <button class="btn btn-ghost" onclick="dec('${p.name.replaceAll('"','&quot;')}')">−</button>
-            <span id="q-${cssId(p.name)}">${cart.get(p.name)?.qty || 0}</span>
-            <button class="btn btn-ghost" onclick="inc('${p.name.replaceAll('"','&quot;')}', ${p.price})">＋</button>
-            <button class="btn btn-primary" style="margin-left:auto" onclick="inc('${p.name.replaceAll('"','&quot;')}', ${p.price})">Agregar</button>
+        const safeName = p.name.replaceAll('"','&quot;');
+        const id = cssId(p.name);
+        return `
+        <article class="card">
+          <div class="thumb">
+            <img src="images/${cssId(p.name)}.jpg" alt="${p.name}" onerror="this.replaceWith(document.createTextNode('Imagen de referencia'))" />
+            <div class="overlay">
+              <div class="overlay-row">
+                <div class="plant-name">${p.name}</div>
+                <div class="price">${CLP.format(p.price)}</div>
+              </div>
+              <div class="controls">
+                <button class="tiny-btn" onclick="dec('${safeName}')">−</button>
+                <span class="qty-chip" id="q-${id}">${cart.get(p.name)?.qty || 0}</span>
+                <button class="tiny-btn" onclick="inc('${safeName}', ${p.price})">＋</button>
+                <button class="tiny-btn tiny-primary" onclick="inc('${safeName}', ${p.price})">Agregar</button>
+              </div>
+            </div>
           </div>
-        </article>`
+        </article>`;
       }).join('');
 
       renderCart();
@@ -253,7 +334,8 @@
       const item = cart.get(name) || { name, price, qty:0 };
       item.qty++;
       cart.set(name, item);
-      document.getElementById(`q-${cssId(name)}`).textContent = item.qty;
+      const qEl = document.getElementById(`q-${cssId(name)}`);
+      if(qEl) qEl.textContent = item.qty;
       renderCart();
     }
 
@@ -322,14 +404,14 @@
       };
 
       try{
-        const res = await fetch(GAS_URL, {
+        await fetch(GAS_URL, {
           method:'POST',
           mode:'no-cors', // Apps Script devuelve 200 sin CORS; no podemos leer body
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify(payload)
         });
         showToast();
-        showModal(); // 👈 abre el modal de éxito
+        showModal(); // abre el modal de éxito
         // Limpieza gentil
         clearCart();
         document.getElementById('orderForm').reset();
